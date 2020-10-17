@@ -1,0 +1,31 @@
+version: "3"
+services:
+    db:
+        container_name: mariadb
+        hostname: mariadb
+        image: mariadb
+        ports:
+          - "3306:3306"
+        environment:
+          MYSQL_DATABASE: kangsunu-db
+          MYSQL_USER: db
+          MYSQL_PASSWORD: db
+          MYSQL_ROOT_PASSWORD: root
+        volumes:
+          - persistent:/var/lib/mysql
+        networks:
+          - default
+    phpmyadmin:
+        container_name: phpmyadmin
+        image: phpmyadmin/phpmyadmin
+        hostname: pma
+        links:
+          - db:db
+        ports:
+          - 8000:80
+        environment:
+          MYSQL_USER: db
+          MYSQL_PASSWORD: db
+          MYSQL_ROOT_PASSWORD: root
+volumes:
+    persistent:

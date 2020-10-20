@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+  ci3:
+    container_name: ci3
+    image: ci3
+    build:
+      context: ../.
+      dockerfile: docker/Dockerfile
+    ports:
+      - 8080:8080
